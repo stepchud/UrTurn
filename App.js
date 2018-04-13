@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import {
   HomeScreen,
   SettingsScreen
-} from './screens';
+} from './app/screens';
 
 export default App = StackNavigator({
   Home: { screen: HomeScreen },

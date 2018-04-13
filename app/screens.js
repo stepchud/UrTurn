@@ -11,8 +11,14 @@ import Const from './constants';
 
 class HomeScreen extends React.Component {
 
-  static navigationOptions = {
-    title: "UrTurn"
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "UrTurn",
+      headerRight: (
+        <Button onPress={()=>{ navigation.navigate('Settings') }}
+          title="Settings" color="#222" />
+      )
+    }
   }
 
   constructor(props) {
@@ -87,8 +93,46 @@ class HomeScreen extends React.Component {
 }
 
 class SettingsScreen extends React.Component {
+  //constructor(props) {
+  //  super(props);
+  //  console.log("constructor");
+  //}
+
+  state = {
+    turns: 2,
+    names: [
+      "Me",
+      "You"
+    ],
+  }
+
+  increment = () => {
+    this.setState({
+      turns: this.state.turns + 1
+    })
+  }
+
+  decrement = () => {
+    if (this.state.turns <= 2) {
+      return
+    }
+    this.setState({
+      turns: this.state.turns - 1
+    })
+  }
+
   render() {
-    return <View style={{flex: 1, backgroundColor: 'blue'}} />
+    const styles = Const.Styles;
+    return (
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <Text>How Many?</Text>
+        <View style={[styles.boxRow]}>
+          <Button title="-" onPress={this.decrement} />
+          <Text>{this.state.turns}</Text>
+          <Button title="+" onPress={this.increment} />
+        </View>
+      </View>
+    )
   }
 }
 
